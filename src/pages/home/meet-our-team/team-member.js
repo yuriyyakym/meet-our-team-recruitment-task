@@ -1,10 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Avatar from 'components/avatar';
 
-const TeamMember = ({ name, title, location, photo, onClick }) => (
+const TeamMember = ({ name, title, email, location, photo, onClick }) => (
   <div className="team-member">
-    <Avatar className="avatar" alt={name} url={photo} />
+    <div className="avatar-container">
+      <Avatar className="avatar" alt={name} url={photo} />
+      {email && (
+        <a className="mail-link" href={`mailto:${email}`}>
+          <FontAwesomeIcon icon="envelope" />
+        </a>
+      )}
+    </div>
+
     <h5 className="name">{name}</h5>
     <span className="title">{title}</span>
     <span className="location">{location}</span>
@@ -12,6 +21,7 @@ const TeamMember = ({ name, title, location, photo, onClick }) => (
 );
 
 TeamMember.propTypes = {
+  email: PropTypes.string,
   location: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   photo: PropTypes.string.isRequired,
