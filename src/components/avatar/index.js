@@ -4,11 +4,12 @@ import classNames from 'classnames';
 import './styles.scss';
 
 const Avatar = ({ alt, className, url, onClick }) => (
-  <img
-    className={classNames('avatar-component', className)}
-    alt={alt}
-    src={url}
-    onClick={onClick} />
+  <div className={classNames('avatar-component', className)}>
+    <img
+      alt={alt}
+      src={url}
+      onClick={onClick} />
+  </div>
 );
 
 Avatar.propTypes = {
