@@ -19,7 +19,7 @@ class Slider extends Component {
     this.state = {
       width: 0,
       height: 0,
-      activeSlideIndex: this.props.activeSlideIndex || 0
+      activeSlideIndex: this.props.initialSlideIndex || 0
     };
   }
 
@@ -30,6 +30,10 @@ class Slider extends Component {
   componentDidMount() {
     this.fitSlides();
     window.addEventListener('resize', this.fitSlides);
+  }
+
+  componentDidUpdate() {
+    this.fitSlides();
   }
 
   componentWillUnmount() {

@@ -1,4 +1,6 @@
 @mixin hover-overlay($color, $initial-opacity: 0.7) {
+  position: relative;
+
   &::after {
     content: '';
     position: absolute;
@@ -6,8 +8,11 @@
     right: 0;
     bottom: 0;
     left: 0;
+    border-radius: inherit;
     background-color: rgba($color, $initial-opacity);
     transition: background-color 0.3s cubic-bezier(.42, 0, .30, .68);
+    z-index: 0;
+    pointer-events: none;
     will-change: background-color;
   }
 

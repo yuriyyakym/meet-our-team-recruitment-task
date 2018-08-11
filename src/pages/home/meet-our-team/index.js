@@ -1,8 +1,8 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import Section from 'components/section';
-import Slider from 'components/slider';
 import TeamMember from './team-member';
+import MembersSlider from './members-slider';
 import backgroundImage from './bg.png';
 import './styles.scss';
 
@@ -11,7 +11,18 @@ class MeetOurTeam extends PureComponent {
     members: PropTypes.array
   };
 
+  state = {
+    activeTeamMemberIndex: null
+  };
+
+  onChangeActiveTeamMember = (index) => {
+    this.setState({
+      activeTeamMemberIndex: index
+    })
+  }
+
   render() {
+    const { activeTeamMemberIndex } = this.state;
     const { members } = this.props;
     return (
       <Section
@@ -20,15 +31,18 @@ class MeetOurTeam extends PureComponent {
         background={backgroundImage}>
         <div className="team-members">
           {members.map((member, index) => (
-            <TeamMember key={index} {...member} />
+            <TeamMember
+              {...member}
+              key={index}
+              onSelect={() => this.onChangeActiveTeamMember(index)} />
           ))}
         </div>
 
-        <Slider>
-          {members.map((member, index) => (
-            <div key={index}>{member.name}</div>
-          ))}
-        </Slider>
+        {activeTeamMemberIndex && (
+          <MembersSlider
+            members={members}
+            activeSlideIndex={activeTeamMemberIndex} />
+        )}
       </Section>
     );
   }
