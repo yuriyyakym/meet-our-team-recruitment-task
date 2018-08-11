@@ -25,8 +25,8 @@ class MeetOurTeam extends PureComponent {
         </div>
 
         <Slider>
-          {members.map((member) => (
-            <div>{member.name}</div>
+          {members.map((member, index) => (
+            <div key={index}>{member.name}</div>
           ))}
         </Slider>
       </Section>

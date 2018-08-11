@@ -1,9 +1,10 @@
-import React, { Children, PureComponent } from 'react';
+import React, { Children, Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './styles.scss';
 
-class Slider extends PureComponent {
+class Slider extends Component {
   static propTypes = {
     activeSlideIndex: PropTypes.any,
     children: PropTypes.node,
@@ -27,23 +28,15 @@ class Slider extends PureComponent {
   }
 
   componentDidMount() {
-    this.recalculateSlideDimensions();
-    window.addEventListener('resize', this.recalculateSlideDimensions);
+    this.fitSlides();
+    window.addEventListener('resize', this.fitSlides);
   }
 
   componentWillUnmount() {
-    window.removeEventListener('resize', this.recalculateSlideDimensions);
+    window.removeEventListener('resize', this.fitSlides);
   }
 
-  recalculateSlideDimensions = () => {
-    const { width, height } = this.sliderRef.current.getBoundingClientRect();
-    this.setState({ width, height });
-    const slidesElements = Array.from(this.slidesRef.current.children);
-    slidesElements.forEach((child) => {
-      child.style.width = `${width}px`;
-    });
-    this.fitSlides();
-  };
+  getSlideWidth = () => this.sliderRef.current.getBoundingClientRect().width;
 
   onNextSlide = () => {
     const { children } = this.props;
@@ -52,14 +45,21 @@ class Slider extends PureComponent {
   };
 
   onPreviousSlide = () => {
-    const activeSlideIndex = Math.max(this.state.activeSlideIndex - 1, 0);
+    const { children } = this.props;
+    const activeSlideIndex = this.state.activeSlideIndex - 1 >= 0
+      ? this.state.activeSlideIndex - 1
+      : Children.count(children) - 1;
     this.setState({ activeSlideIndex }, this.fitSlides);
   };
 
   fitSlides = () => {
-    const { activeSlideIndex, width, children } = this.state;
-    const childrenCount = Children.count(children);
-    const offsetX = (childrenCount - activeSlideIndex) * width;
+    const { activeSlideIndex } = this.state;
+    const slideWidth = this.getSlideWidth();
+    const slideElements = Array.from(this.slidesRef.current.children);
+    const offsetX = -activeSlideIndex * slideWidth;
+    slideElements.forEach((slide) => {
+      slide.style.width = `${slideWidth}px`;
+    });
     this.slidesRef.current.style.transform = `translateX(${offsetX}px)`;
   };
 
@@ -69,12 +69,10 @@ class Slider extends PureComponent {
     return (
       <div ref={this.sliderRef} className={classNames('slider-component', className)}>
         <div className="arrow-button left" onClick={this.onPreviousSlide}>
-          123
+          <FontAwesomeIcon icon="angle-left" />
         </div>
 
-        <div
-          ref={this.slidesRef}
-          className="slides">
+        <div ref={this.slidesRef} className="slides">
           {Children.map(children, (child, index) => (
             <div key={index} className="slide">
               {child}
@@ -83,7 +81,7 @@ class Slider extends PureComponent {
         </div>
 
         <div className="arrow-button right" onClick={this.onNextSlide}>
-          456
+          <FontAwesomeIcon icon="angle-right" />
         </div>
       </div>
     );
