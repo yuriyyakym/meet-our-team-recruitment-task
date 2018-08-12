@@ -39,6 +39,11 @@
           right: 5px;
           background-color: $color-primary;
           color: white;
+          transition: color 300ms ease-out;
+
+          &:hover {
+            color: $color-secondary;
+          }
         }
       }
 
