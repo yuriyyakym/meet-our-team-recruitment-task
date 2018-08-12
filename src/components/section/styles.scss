@@ -1,12 +1,22 @@
 @import 'variables.scss';
 
 .section-component {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   margin: 50px 0;
   padding: 50px;
+
+  .section-background {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+  }
 
   h1 {
     font-size: 60px;

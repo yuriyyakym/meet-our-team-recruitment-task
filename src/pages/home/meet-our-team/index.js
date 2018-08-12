@@ -34,6 +34,7 @@ class MeetOurTeam extends PureComponent {
       <Section
         className="meet-our-team"
         title="Meet our team"
+        backgroundClassName="team-members-background"
         background={backgroundImage}>
         <div className="team-members">
           {members.map((member, index) => (

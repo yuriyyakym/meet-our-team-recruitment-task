@@ -4,6 +4,10 @@
 .meet-our-team {
   position: relative;
 
+  .team-members-background {
+    opacity: 0.4;
+  }
+
   .team-members {
     display: grid;
     grid-template-areas: "a a a a a";
@@ -98,4 +102,3 @@
     transition: opacity 400ms ease-in;
   }
 }
-
