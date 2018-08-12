@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Avatar from 'components/avatar';
 
-const TeamMember = ({ name, title, email, location, photo, onSelect }) => (
+const TeamMember = ({ name, title, email, location, photo, onClick }) => (
   <div className="team-member">
     <div className="avatar-container">
-      <Avatar className="avatar" alt={name} url={photo} onClick={onSelect} />
+      <Avatar className="avatar" alt={name} url={photo} onClick={onClick} />
 
       {email && (
         <a className="mail-link" href={`mailto:${email}`}>
@@ -27,7 +27,7 @@ TeamMember.propTypes = {
   name: PropTypes.string.isRequired,
   photo: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
-  onSelect: PropTypes.func
+  onClick: PropTypes.func.isRequired
 };
 
 export default TeamMember;

@@ -5,15 +5,13 @@
   width: 100%;
   height: 100%;
   overflow: hidden;
-  will-change: width;
 
   .slides {
     position: absolute;
     display: flex;
     height: inherit;
     overflow: hidden;
-    transition: transform 0.5s cubic-bezier(0.4, 0.1,.24,1);
-    will-change: width;
+    transition: transform 0.5s cubic-bezier(0.4, 0.1, 0.24, 1);
 
     .slide {
       display: flex;
@@ -21,7 +19,6 @@
       align-items: center;
       height: inherit;
       overflow: hidden;
-      will-change: transform, width;
     }
   }
 

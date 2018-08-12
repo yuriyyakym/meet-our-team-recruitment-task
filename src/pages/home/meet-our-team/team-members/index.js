@@ -3,20 +3,20 @@ import PropTypes from 'prop-types';
 import TeamMember from './team-member';
 import './styles.scss';
 
-const TeamMembers = ({ members, onChangeActiveTeamMember }) => (
+const TeamMembers = ({ members, onMemberClick }) => (
   <div className="team-members">
     {members.map((member, index) => (
       <TeamMember
         {...member}
         key={index}
-        onSelect={() => onChangeActiveTeamMember(index)} />
+        onClick={() => onMemberClick(index)} />
     ))}
   </div>
 );
 
 TeamMembers.propTypes = {
-  members: PropTypes.array,
-  onChangeActiveTeamMember: PropTypes.func.isRequired
+  members: PropTypes.array.isRequired,
+  onMemberClick: PropTypes.func.isRequired
 };
 
 export default TeamMembers;

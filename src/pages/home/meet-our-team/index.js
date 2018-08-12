@@ -1,14 +1,16 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Section from 'components/section';
 import TeamMembers from './team-members';
 import MembersSlider from './members-slider';
-import backgroundImage from './bg.png';
+import backgroundImageUrl from './bg.png';
 import './styles.scss';
 
-class MeetOurTeam extends PureComponent {
+const SLIDER_APPEARANCE_DURATION = 400;
+
+class MeetOurTeam extends Component {
   static propTypes = {
     members: PropTypes.array
   };
@@ -35,13 +37,13 @@ class MeetOurTeam extends PureComponent {
         className="meet-our-team"
         title="Meet our team"
         backgroundClassName="team-members-background"
-        background={backgroundImage}>
-        <TeamMembers members={members} onChangeActiveTeamMember={this.onChangeActiveTeamMember} />
+        background={backgroundImageUrl}>
+        <TeamMembers members={members} onMemberClick={this.onChangeActiveTeamMember} />
 
         <ReactCSSTransitionGroup
           transitionName="slider-animation"
-          transitionEnterTimeout={400}
-          transitionLeaveTimeout={400}>
+          transitionEnterTimeout={SLIDER_APPEARANCE_DURATION}
+          transitionLeaveTimeout={SLIDER_APPEARANCE_DURATION}>
           {activeTeamMemberIndex !== null && (
             <div className="slider-container">
               <MembersSlider

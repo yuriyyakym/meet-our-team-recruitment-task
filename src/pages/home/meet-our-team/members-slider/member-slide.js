@@ -15,7 +15,11 @@ const MemberSlide = ({ member }) => (
 );
 
 MemberSlide.propTypes = {
-  member: PropTypes.object
+  member: PropTypes.shape({
+    slideBackground: PropTypes.string,
+    title: PropTypes.string,
+    name: PropTypes.string.isRequired
+  })
 };
 
 export default MemberSlide;

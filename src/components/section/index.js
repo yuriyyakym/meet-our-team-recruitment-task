@@ -16,11 +16,11 @@ const Section = ({ background, backgroundClassName, children, className, title }
 );
 
 Section.propTypes = {
-  background: PropTypes.any,
+  background: PropTypes.string,
   backgroundClassName: PropTypes.string,
-  children: PropTypes.node,
+  children: PropTypes.node.isRequired,
   className: PropTypes.string,
-  title: PropTypes.string
+  title: PropTypes.string.isRequired
 };
 
 export default Section;

@@ -42,19 +42,18 @@
 
   .slider-animation-enter {
     opacity: 0.01;
-  }
 
-  .slider-animation-enter.slider-animation-enter-active {
-    opacity: 1;
-    transition: opacity 400ms ease-in;
+    &.slider-animation-enter-active {
+      opacity: 1;
+      transition: opacity 400ms ease-in;
+    }
   }
 
   .slider-animation-leave {
     opacity: 1;
-  }
-
-  .slider-animation-leave.slider-animation-leave-active {
-    opacity: 0.01;
-    transition: opacity 400ms ease-in;
+    &.slider-animation-leave-active {
+      opacity: 0.01;
+      transition: opacity 400ms ease-in;
+    }
   }
 }

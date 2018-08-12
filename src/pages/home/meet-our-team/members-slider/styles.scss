@@ -11,23 +11,22 @@
     height: 100%;
     background-size: cover;
     background-position: center;
-    font-size: 10px;
 
     .member-details {
       position: relative;
       max-width: 230px;
       padding: 25px 10px;
-      border: 2px dashed rgba(#bbb, 0.4);
+      border: 2px dashed rgba($color-gray, 0.3);
       text-align: center;
       color: white;
       z-index: 2;
 
       .title {
-        font-size: 1.6em;
+        font-size: 16px;
       }
 
       .name {
-        font-size: 2em;
+        font-size: 20px;
       }
 
       @include sm {
@@ -35,22 +34,22 @@
         max-width: 400px;
 
         .title {
-          font-size: 2.6em;
+          font-size: 26px;
         }
 
         .name {
-          font-size: 4.6em;
+          font-size: 46px;
         }
       }
 
       @include lg {
         max-width: initial;
         .title {
-          font-size: 3.6em;
+          font-size: 36px;
         }
 
         .name {
-          font-size: 6em;
+          font-size: 60px;
         }
       }
     }
