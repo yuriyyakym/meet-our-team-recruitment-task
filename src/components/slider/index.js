@@ -5,6 +5,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './styles.scss';
 
 class Slider extends Component {
+  static defaultProps = {
+    initialSlideIndex: 0
+  };
+
   static propTypes = {
     initialSlideIndex: PropTypes.number,
     children: PropTypes.node,
@@ -17,8 +21,16 @@ class Slider extends Component {
     this.state = {
       width: 0,
       height: 0,
-      activeSlideIndex: this.props.initialSlideIndex || 0
+      withTransition: false,
+      activeSlideIndex: this.props.initialSlideIndex
     };
+  }
+
+  static getDerivedStateFromProps(props, state) {
+    if (props.initialSlideIndex !== state.activeSlideIndex && !state.withTransition) {
+      return { withTransition: true };
+    }
+    return null;
   }
 
   componentDidMount() {
@@ -48,7 +60,7 @@ class Slider extends Component {
   };
 
   render() {
-    const { slideWidth, activeSlideIndex } = this.state;
+    const { slideWidth, activeSlideIndex, withTransition } = this.state;
     const { className, children } = this.props;
     const offsetX = -activeSlideIndex * slideWidth;
 
@@ -62,7 +74,12 @@ class Slider extends Component {
           <FontAwesomeIcon icon="angle-left" />
         </div>
 
-        <div className="slides" style={{ transform: `translateX(${offsetX}px)` }}>
+        <div
+          className="slides"
+          style={{
+            transitionDelay: withTransition ? undefined : '-1s',
+            transform: `translateX(${offsetX}px)`
+          }}>
           {Children.map(children, (child, index) => (
             <div key={index} className="slide" style={{ width: slideWidth }}>
               {child}
