@@ -3,11 +3,27 @@
 
 .team-members {
   display: grid;
-  grid-template-areas: "a a a a a";
+  grid-template-areas: "a";
+  grid-auto-columns: 180px;
   -ms-flex-pack: distribute;
   justify-content: space-around;
   grid-gap: 80px;
-  grid-auto-columns: 180px;
+
+  @include sm {
+    grid-template-areas: "a a";
+  }
+
+  @include md {
+    grid-template-areas: "a a a";
+  }
+
+  @include lg {
+    grid-template-areas: "a a a a";
+  }
+
+  @include xl {
+    grid-template-areas: "a a a a a";
+  }
 
   .team-member {
     display: flex;

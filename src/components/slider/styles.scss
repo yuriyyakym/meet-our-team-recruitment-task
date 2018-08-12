@@ -1,3 +1,5 @@
+@import 'utils.scss';
+
 .slider-component {
   position: relative;
   width: 100%;
@@ -18,6 +20,7 @@
       justify-content: space-around;
       align-items: center;
       height: inherit;
+      overflow: hidden;
       will-change: transform, width;
     }
   }
@@ -26,15 +29,20 @@
     position: absolute;
     top: 0;
     bottom: 0;
-    width: 130px;
+    width: 90px;
     display: flex;
     align-items: center;
     justify-content: space-around;
     color: white;
-    font-size: 80px;
+    font-size: 40px;
     text-align: center;
     z-index: 1;
     cursor: pointer;
+
+    @include lg {
+      width: 130px;
+      font-size: 80px;
+    }
 
     &.left {
       left: 0;
