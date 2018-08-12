@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Section from 'components/section';
 import TeamMember from './team-member';
@@ -43,17 +44,22 @@ class MeetOurTeam extends PureComponent {
           ))}
         </div>
 
-        {activeTeamMemberIndex !== null && (
-          <div className="slider-container">
-            <MembersSlider
-              members={members}
-              activeSlideIndex={activeTeamMemberIndex} />
-            <FontAwesomeIcon
-              className="close-button"
-              icon="times"
-              onClick={this.onCloseSlider} />
-          </div>
-        )}
+        <ReactCSSTransitionGroup
+          transitionName="slider-animation"
+          transitionEnterTimeout={400}
+          transitionLeaveTimeout={400}>
+          {activeTeamMemberIndex !== null && (
+            <div className="slider-container">
+              <MembersSlider
+                members={members}
+                activeSlideIndex={activeTeamMemberIndex} />
+              <FontAwesomeIcon
+                className="close-button"
+                icon="times"
+                onClick={this.onCloseSlider} />
+            </div>
+          )}
+        </ReactCSSTransitionGroup>
       </Section>
     );
   }

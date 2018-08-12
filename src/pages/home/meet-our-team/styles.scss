@@ -70,13 +70,32 @@
 
     .close-button {
       position: absolute;
-      top: 30px;
+      top: 20px;
       right: 30px;
       padding: 20px;
-      font-size: 50px;
+      font-size: 80px;
       color: white;
       z-index: 2;
       cursor: pointer;
     }
   }
+
+  .slider-animation-enter {
+    opacity: 0.01;
+  }
+
+  .slider-animation-enter.slider-animation-enter-active {
+    opacity: 1;
+    transition: opacity 400ms ease-in;
+  }
+
+  .slider-animation-leave {
+    opacity: 1;
+  }
+
+  .slider-animation-leave.slider-animation-leave-active {
+    opacity: 0.01;
+    transition: opacity 400ms ease-in;
+  }
 }
+

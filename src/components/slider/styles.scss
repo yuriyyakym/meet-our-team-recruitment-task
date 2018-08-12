@@ -26,12 +26,12 @@
     position: absolute;
     top: 0;
     bottom: 0;
-    width: 120px;
+    width: 130px;
     display: flex;
     align-items: center;
     justify-content: space-around;
     color: white;
-    font-size: 50px;
+    font-size: 80px;
     text-align: center;
     z-index: 1;
     cursor: pointer;
@@ -42,6 +42,10 @@
 
     &.right {
       right: 0;
+    }
+
+    &.hidden {
+      display: none;
     }
   }
 }

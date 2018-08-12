@@ -30,35 +30,39 @@ class Slider extends Component {
   }
 
   componentDidMount() {
-    this.fitSlides();
-    window.addEventListener('resize', this.fitSlides);
+    this.updateViewWithoutTransition();
+    window.addEventListener('resize', this.updateViewWithoutTransition);
   }
 
   componentDidUpdate() {
-    this.fitSlides();
+    this.updateViewWithoutTransition();
   }
 
   componentWillUnmount() {
-    window.removeEventListener('resize', this.fitSlides);
+    window.removeEventListener('resize', this.updateViewWithoutTransition);
   }
+
+  updateViewWithoutTransition = () => {
+    this.slidesRef.current.classList.add('no-transition');
+    this.updateView();
+    setTimeout(() => this.slidesRef.current.classList.remove('no-transition'), 0);
+  };
 
   getSlideWidth = () => this.sliderRef.current.getBoundingClientRect().width;
 
   onNextSlide = () => {
     const { children } = this.props;
-    const activeSlideIndex = (this.state.activeSlideIndex + 1) % Children.count(children);
-    this.setState({ activeSlideIndex }, this.fitSlides);
+    const maxIndex = Children.count(children) - 1;
+    const activeSlideIndex = Math.min(this.state.activeSlideIndex + 1, maxIndex);
+    this.setState({ activeSlideIndex }, this.updateView);
   };
 
   onPreviousSlide = () => {
-    const { children } = this.props;
-    const activeSlideIndex = this.state.activeSlideIndex - 1 >= 0
-      ? this.state.activeSlideIndex - 1
-      : Children.count(children) - 1;
-    this.setState({ activeSlideIndex }, this.fitSlides);
+    const activeSlideIndex = Math.max(this.state.activeSlideIndex - 1, 0);
+    this.setState({ activeSlideIndex }, this.updateView);
   };
 
-  fitSlides = () => {
+  updateView = () => {
     const { activeSlideIndex } = this.state;
     const slideWidth = this.getSlideWidth();
     const slideElements = Array.from(this.slidesRef.current.children);
@@ -67,6 +71,25 @@ class Slider extends Component {
       slide.style.width = `${slideWidth}px`;
     });
     this.slidesRef.current.style.transform = `translateX(${offsetX}px)`;
+    this.updateNavigationButtons();
+  };
+
+  updateNavigationButtons = () => {
+    const { activeSlideIndex } = this.state;
+    const { children } = this.props;
+    const minIndex = 0;
+    const maxIndex = Children.count(children) - 1;
+
+    this.leftButtonRef.current.classList.remove('hidden');
+    this.rightButtonRef.current.classList.remove('hidden');
+
+    if (activeSlideIndex === minIndex) {
+      this.leftButtonRef.current.classList.add('hidden');
+    }
+
+    if (activeSlideIndex === maxIndex) {
+      this.rightButtonRef.current.classList.add('hidden');
+    }
   };
 
   render() {
@@ -78,7 +101,7 @@ class Slider extends Component {
           <FontAwesomeIcon icon="angle-left" />
         </div>
 
-        <div ref={this.slidesRef} className="slides">
+        <div ref={this.slidesRef} className="slides no-transition">
           {Children.map(children, (child, index) => (
             <div key={index} className="slide">
               {child}
