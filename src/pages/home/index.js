@@ -7,6 +7,7 @@ const Home = () => (
   <div>
     <Lorem />
     <MeetOurTeem members={team} />
+    <Lorem />
   </div>
 );
 

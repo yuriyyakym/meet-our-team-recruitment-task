@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Section from 'components/section';
-import TeamMember from './team-member';
+import TeamMembers from './team-members';
 import MembersSlider from './members-slider';
 import backgroundImage from './bg.png';
 import './styles.scss';
@@ -36,14 +36,7 @@ class MeetOurTeam extends PureComponent {
         title="Meet our team"
         backgroundClassName="team-members-background"
         background={backgroundImage}>
-        <div className="team-members">
-          {members.map((member, index) => (
-            <TeamMember
-              {...member}
-              key={index}
-              onSelect={() => this.onChangeActiveTeamMember(index)} />
-          ))}
-        </div>
+        <TeamMembers members={members} onChangeActiveTeamMember={this.onChangeActiveTeamMember} />
 
         <ReactCSSTransitionGroup
           transitionName="slider-animation"

@@ -1,3 +1,8 @@
 $color-primary: #452e76;
 $color-secondary: #48c3dc;
 $color-gray: #999;
+
+$screen-xs: (max-width: 767px);
+$screen-sm: (min-width: 768px);
+$screen-md: (min-width: 992px);
+$screen-lg: (min-width: 1200px);
