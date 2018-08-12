@@ -1,7 +1,7 @@
 .slider-component {
   position: relative;
   width: 100%;
-  height: 400px;
+  height: 100%;
   overflow: hidden;
   will-change: width;
 
@@ -10,7 +10,7 @@
     display: flex;
     height: inherit;
     overflow: hidden;
-    transition: transform 0.3s;
+    transition: transform 0.5s cubic-bezier(0.4, 0.1,.24,1);
     will-change: width;
 
     .slide {
@@ -18,7 +18,7 @@
       justify-content: space-around;
       align-items: center;
       height: inherit;
-      will-change: transfor, width;
+      will-change: transform, width;
     }
   }
 
@@ -26,11 +26,12 @@
     position: absolute;
     top: 0;
     bottom: 0;
-    width: 100px;
+    width: 120px;
     display: flex;
     align-items: center;
     justify-content: space-around;
-    font-size: 4rem;
+    color: white;
+    font-size: 50px;
     text-align: center;
     z-index: 1;
     cursor: pointer;

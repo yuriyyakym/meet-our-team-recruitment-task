@@ -1,21 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Slider from 'components/slider';
+import MemberSlide from './member-slide';
+import './styles.scss';
 
 const MembersSlider = ({ members, activeSlideIndex }) => (
-  <Slider initialSlideIndex={activeSlideIndex}>
+  <Slider className="members-slider" initialSlideIndex={activeSlideIndex}>
     {members.map((member, index) => (
-      <div
-        className="member-slide"
-        key={index}
-        style={{
-          backgroundImage: `url('${member.slideBackground}')`
-        }}>
-        <div className="member-details">
-          <h4 className="title">{member.title}</h4>
-          <h1 className="name">{member.name}</h1>
-        </div>
-      </div>
+      <MemberSlide member={member} key={index} />
     ))}
   </Slider>
 );

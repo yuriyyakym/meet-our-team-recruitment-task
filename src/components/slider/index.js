@@ -15,6 +15,8 @@ class Slider extends Component {
     super(props);
     this.sliderRef = React.createRef();
     this.slidesRef = React.createRef();
+    this.leftButtonRef = React.createRef();
+    this.rightButtonRef = React.createRef();
     this.windowResizeEvent = null;
     this.state = {
       width: 0,
@@ -72,7 +74,7 @@ class Slider extends Component {
 
     return (
       <div ref={this.sliderRef} className={classNames('slider-component', className)}>
-        <div className="arrow-button left" onClick={this.onPreviousSlide}>
+        <div ref={this.leftButtonRef} className="arrow-button left" onClick={this.onPreviousSlide}>
           <FontAwesomeIcon icon="angle-left" />
         </div>
 
@@ -84,7 +86,7 @@ class Slider extends Component {
           ))}
         </div>
 
-        <div className="arrow-button right" onClick={this.onNextSlide}>
+        <div ref={this.rightButtonRef} className="arrow-button right" onClick={this.onNextSlide}>
           <FontAwesomeIcon icon="angle-right" />
         </div>
       </div>

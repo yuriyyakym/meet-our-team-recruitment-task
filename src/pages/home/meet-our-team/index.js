@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Section from 'components/section';
 import TeamMember from './team-member';
 import MembersSlider from './members-slider';
@@ -21,6 +22,10 @@ class MeetOurTeam extends PureComponent {
     })
   }
 
+  onCloseSlider = () => {
+    this.setState({ activeTeamMemberIndex: null });
+  }
+
   render() {
     const { activeTeamMemberIndex } = this.state;
     const { members } = this.props;
@@ -38,10 +43,16 @@ class MeetOurTeam extends PureComponent {
           ))}
         </div>
 
-        {activeTeamMemberIndex && (
-          <MembersSlider
-            members={members}
-            activeSlideIndex={activeTeamMemberIndex} />
+        {activeTeamMemberIndex !== null && (
+          <div className="slider-container">
+            <MembersSlider
+              members={members}
+              activeSlideIndex={activeTeamMemberIndex} />
+            <FontAwesomeIcon
+              className="close-button"
+              icon="times"
+              onClick={this.onCloseSlider} />
+          </div>
         )}
       </Section>
     );

@@ -2,6 +2,8 @@
 @import 'utils.scss';
 
 .meet-our-team {
+  position: relative;
+
   .team-members {
     display: grid;
     grid-template-areas: "a a a a a";
@@ -59,26 +61,22 @@
     }
   }
 
-  .member-slide {
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    width: 100%;
-    height: 100%;
-    background-size: cover;
-    background-position: center;
+  .slider-container {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
 
-    .member-details {
-      border: 2px dashed rgba(#aaa, 0.4);
-      padding: 85px 55px;
-
-      .title {
-        font-size: 72px;
-      }
-
-      .name {
-        font-size: 120px;
-      }
+    .close-button {
+      position: absolute;
+      top: 30px;
+      right: 30px;
+      padding: 20px;
+      font-size: 50px;
+      color: white;
+      z-index: 2;
+      cursor: pointer;
     }
   }
 }
